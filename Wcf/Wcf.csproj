@@ -180,7 +180,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.svc" />
     <Content Include="WCFWeatherCity.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -190,14 +189,8 @@
     <Compile Include="DAL\Entities\CityWeather.cs" />
     <Compile Include="DAL\Entities\Country.cs" />
     <Compile Include="DTOs\CityWeatherDTO.cs" />
-    <Compile Include="Interface\ICityWeather.cs" />
     <Compile Include="IWCFWeatherCity.cs" />
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\CityWeatherService.cs" />
     <Compile Include="WCFWeatherCity.svc.cs">
       <DependentUpon>WCFWeatherCity.svc</DependentUpon>
     </Compile>
