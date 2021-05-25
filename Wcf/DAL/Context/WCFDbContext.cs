@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Wcf.DAL.Entities;
@@ -24,8 +25,8 @@ namespace Wcf.DAL.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=WSBEXT-MIGUELP; Database=DBTESTNET; Trusted_Connection=True; MultipleActiveResultSets=true;");
+                var dataConnect = ConfigurationManager.AppSettings["ConnectionStringDB"].ToString();
+                optionsBuilder.UseSqlServer(dataConnect);
             }
         }
 
