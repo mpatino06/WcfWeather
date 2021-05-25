@@ -22,12 +22,12 @@ namespace Wcf
         List<CityWeatherDTO> GetWeatherCityByIdCity(int Id);
 
         [OperationContract]
-        bool InsertWeatherCity(CityWeatherDTO User);
+        bool InsertWeatherCity(CityWeatherDTO city);
 
         [OperationContract]
-        void UpdateWeatherCity(CityWeatherDTO User);
+        bool UpdateWeatherCity(CityWeatherDTO city);
 
         [OperationContract]
-        void DeleteWeatherCity(int Id);
+        bool DeleteWeatherCity(int Id);
     }
 }

@@ -11,8 +11,8 @@ namespace WebAppWeather.Service
         Task<List<CityWeatherModel>> Get();
         Task<CityWeatherModel> GetWeatherCityById(int Id); 
         Task<List<CityWeatherModel>> GetWeatherCityByIdCity(int Id); 
-        Task<bool> InsertWeatherCity(CityWeatherModel User); 
-        Task<bool> UpdateWeatherCity(CityWeatherModel User);
+        Task<bool> InsertWeatherCity(CityWeatherModel city); 
+        Task<bool> UpdateWeatherCity(CityWeatherModel city);
         Task<bool> DeleteWeatherCity(int Id);
     }
 }

@@ -1,7 +1,58 @@
-﻿
+﻿@model IEnumerable<CityWeatherModel>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Clima</h1>
+<div class="card">
+    <div class="card-header bg-dark text-light ml-0 row container">
+        <div class="col-md-6">
+            <i class="fa fa-list-ul"></i>Lista de datos del Clima
+        </div>
+        <div class="col-md-6 text-right">
+            <a asp-action="Create" asp-controller="Clima" class="btn btn-primary btn-sm text-white">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            @if (Model.Count() > 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered">
 
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(a => a.IdCityWeather)</th>
+                                <th>@Html.DisplayNameFor(a => a.City)</th>
+                                <th>@Html.DisplayNameFor(a => a.Temperature)</th>
+                                <th>@Html.DisplayNameFor(a => a.Description)</th>
+                                <th>@Html.DisplayNameFor(a => a.DateCreated)</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@Html.DisplayFor(x => item.IdCityWeather)</td>
+                                <td>@Html.DisplayFor(x => item.City)</td>
+                                <td>@Html.DisplayFor(x => item.Temperature)</td>
+                                <td>@Html.DisplayFor(x => item.Description)</td>
+                                <td>@Html.DisplayFor(x => item.DateCreated)</td>
+                                <td width="100px">
+                                    <partial name="_TableButtonPartial" model="@item.IdCityWeather" />
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p>No Har Registros en base de datos</p>
+            }
+        </div>
+    </div>
+</div>

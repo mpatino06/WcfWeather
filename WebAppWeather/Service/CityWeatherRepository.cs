@@ -18,8 +18,10 @@ namespace WebAppWeather.Service
         }
         public async Task<bool> DeleteWeatherCity(int Id)
         {
+            WCFWeatherCityClient client = new WCFWeatherCityClient();
+            var result = await client.DeleteWeatherCityAsync(Id);
+
             return true;
-            //var result = await client.GetAsync();
         }
 
         public async Task<List<CityWeatherModel>> Get()
@@ -35,9 +37,17 @@ namespace WebAppWeather.Service
             return modelo;
         }
 
-        Task<CityWeatherModel> ICityWeatherRepository.GetWeatherCityById(int Id)
+        public async Task<CityWeatherModel> GetWeatherCityById(int Id)
         {
-            throw new NotImplementedException();
+            CityWeatherModel modelo = new CityWeatherModel();
+            WCFWeatherCityClient client = new WCFWeatherCityClient();
+            var result = await client.GetWeatherCityByIdAsync(Id);
+
+            if (result != null)
+            {
+                modelo = mapper.Map<CityWeatherModel>(result);
+            }
+            return modelo;
         }
 
         Task<List<CityWeatherModel>> ICityWeatherRepository.GetWeatherCityByIdCity(int Id)
@@ -45,14 +55,34 @@ namespace WebAppWeather.Service
             throw new NotImplementedException();
         }
 
-        Task<bool> ICityWeatherRepository.InsertWeatherCity(CityWeatherModel User)
+        public async Task<bool> InsertWeatherCity(CityWeatherModel city)
         {
-            throw new NotImplementedException();
+            CityWeatherDTO modelo = new CityWeatherDTO {           
+                IdCity = city.IdCity,
+                Temperature = city.Temperature,
+                Description = city.Description,
+                DateCreated =  city.DateCreated
+            };
+
+            WCFWeatherCityClient client = new WCFWeatherCityClient();
+            var result = await client.InsertWeatherCityAsync(modelo);
+            return result;
         }
 
-        Task<bool> ICityWeatherRepository.UpdateWeatherCity(CityWeatherModel User)
+        public async Task<bool> UpdateWeatherCity(CityWeatherModel city)
         {
-            throw new NotImplementedException();
+            CityWeatherDTO modelo = new CityWeatherDTO
+            {
+                IdCityWeather = city.IdCityWeather,
+                IdCity = city.IdCity,
+                Temperature = city.Temperature,
+                Description = city.Description,
+                DateCreated = city.DateCreated
+            };
+
+            WCFWeatherCityClient client = new WCFWeatherCityClient();
+            var result = await client.UpdateWeatherCityAsync(modelo);
+            return true;
         }
     }
 }

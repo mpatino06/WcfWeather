@@ -124,13 +124,13 @@ namespace ServiceReferenceWeather
         System.Threading.Tasks.Task<ServiceReferenceWeather.CityWeatherDTO[]> GetWeatherCityByIdCityAsync(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFWeatherCity/InsertWeatherCity", ReplyAction="http://tempuri.org/IWCFWeatherCity/InsertWeatherCityResponse")]
-        System.Threading.Tasks.Task<bool> InsertWeatherCityAsync(ServiceReferenceWeather.CityWeatherDTO User);
+        System.Threading.Tasks.Task<bool> InsertWeatherCityAsync(ServiceReferenceWeather.CityWeatherDTO city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFWeatherCity/UpdateWeatherCity", ReplyAction="http://tempuri.org/IWCFWeatherCity/UpdateWeatherCityResponse")]
-        System.Threading.Tasks.Task UpdateWeatherCityAsync(ServiceReferenceWeather.CityWeatherDTO User);
+        System.Threading.Tasks.Task<bool> UpdateWeatherCityAsync(ServiceReferenceWeather.CityWeatherDTO city);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFWeatherCity/DeleteWeatherCity", ReplyAction="http://tempuri.org/IWCFWeatherCity/DeleteWeatherCityResponse")]
-        System.Threading.Tasks.Task DeleteWeatherCityAsync(int Id);
+        System.Threading.Tasks.Task<bool> DeleteWeatherCityAsync(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
@@ -198,17 +198,17 @@ namespace ServiceReferenceWeather
             return base.Channel.GetWeatherCityByIdCityAsync(Id);
         }
         
-        public System.Threading.Tasks.Task<bool> InsertWeatherCityAsync(ServiceReferenceWeather.CityWeatherDTO User)
+        public System.Threading.Tasks.Task<bool> InsertWeatherCityAsync(ServiceReferenceWeather.CityWeatherDTO city)
         {
-            return base.Channel.InsertWeatherCityAsync(User);
+            return base.Channel.InsertWeatherCityAsync(city);
         }
         
-        public System.Threading.Tasks.Task UpdateWeatherCityAsync(ServiceReferenceWeather.CityWeatherDTO User)
+        public System.Threading.Tasks.Task<bool> UpdateWeatherCityAsync(ServiceReferenceWeather.CityWeatherDTO city)
         {
-            return base.Channel.UpdateWeatherCityAsync(User);
+            return base.Channel.UpdateWeatherCityAsync(city);
         }
         
-        public System.Threading.Tasks.Task DeleteWeatherCityAsync(int Id)
+        public System.Threading.Tasks.Task<bool> DeleteWeatherCityAsync(int Id)
         {
             return base.Channel.DeleteWeatherCityAsync(Id);
         }

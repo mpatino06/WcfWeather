@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +30,27 @@ namespace WebAppWeather
 
             //AUTOMMAPER
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //services.AddAutoMapper(typeof(Startup));
+
+
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+            //{
+            //    option.Cookie.HttpOnly = true;
+            //    option.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+            //    option.LoginPath = "/Home/Index";
+            //    option.AccessDeniedPath = "/Home/Error";
+            //    option.SlidingExpiration = true;
+            //});
+
+            services.AddAuthentication("CookieAuthentication")
+                 .AddCookie("CookieAuthentication", config =>
+                 {
+                     config.Cookie.Name = "UserLoginCookie";
+                     config.LoginPath = "/Login/Index";
+                     config.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+                     config.AccessDeniedPath = "/Home/Error";
+                 });
+
+            services.AddControllersWithViews();
 
 
         }
@@ -52,13 +73,15 @@ namespace WebAppWeather
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}");
             });
         }
     }

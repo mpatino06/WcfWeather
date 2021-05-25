@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using Wcf.DAL.Context;
+using Wcf.DAL.Entities;
 using Wcf.DTOs;
 
 namespace Wcf
@@ -64,19 +65,55 @@ namespace Wcf
                ).Where(a => a.IdCity == Id).ToList();
         }
 
-        public bool InsertWeatherCity(CityWeatherDTO User)
+        public bool InsertWeatherCity(CityWeatherDTO city)
         {
-            throw new NotImplementedException();
+            var result = 0;
+            try
+            {
+                var entity = new CityWeather()
+                {
+                    IdCity = city.IdCity,
+                    Description = city.Description,
+                    Temperature = city.Temperature,
+                    DateCreated = city.DateCreated
+                };
+
+                _context.CityWeather.Add(entity);
+                _context.SaveChanges();
+                result = entity.IdCityWeather;
+            }
+            catch (Exception ex)
+            {
+                result = 0;
+            }
+            return (result > 0);
         }
 
-        public void UpdateWeatherCity(CityWeatherDTO User)
+        public bool UpdateWeatherCity(CityWeatherDTO city)
         {
-            throw new NotImplementedException();
+            var entity = _context.CityWeather.FirstOrDefault(s => s.IdCityWeather == city.IdCityWeather);
+
+            entity.IdCity = city.IdCity;
+            entity.Description = city.Description;
+            entity.Temperature = city.Temperature;
+            entity.DateCreated = city.DateCreated;
+
+            var result = _context.SaveChanges();
+
+            return (result > 0);
         }
 
-        public void DeleteWeatherCity(int Id)
+        public bool DeleteWeatherCity(int Id)
         {
-            throw new NotImplementedException();
+            var entity = new CityWeather()
+            {
+                IdCityWeather = Id
+            };
+            _context.CityWeather.Attach(entity);
+            _context.CityWeather.Remove(entity);
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }
